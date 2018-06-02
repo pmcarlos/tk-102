@@ -67,10 +67,10 @@ tk102.createServer = function( vars ) {
 				//data = '(027028641389BR00160123A1428.4284N07850.1819E020.90557101.200000000000L00000000)';
 				var gps = {}
 				//gps = tk102.parse( data )
-				if( data != '' ) {
+				if( data.length > 25  ) {
 					
 					var gps = tk102.parse( data )
-					//console.log(gps)
+					console.log(gps)
 					if( gps ) {
 						tk102.emit( 'trackGPS', gps )
 					} else {
@@ -89,7 +89,7 @@ tk102.parse = function (raw){
 	//console.log('IMEI'+IMEI)
 	var Nbound = raw.substring(raw.indexOf('A')+1,raw.indexOf('N'));
 
-	var Ebound = raw.substring(raw.indexOf('N')+2,raw.indexOf('E'));
+	var Ebound = raw.substring(raw.indexOf('N')+2,raw.indexOf('W'));
 
 	var latitude =  parseFloat(parseInt(Nbound.substring(0,2))+parseFloat(Nbound.substring(2,Nbound.length))/60).toFixed(5)
 	var longitude =   parseFloat(parseInt(Ebound.substring(0,2))+parseFloat(Ebound.substring(2,Ebound.length))/60).toFixed(5)
