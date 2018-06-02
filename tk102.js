@@ -85,18 +85,21 @@ tk102.createServer = function( vars ) {
 	})
 }
 tk102.parse = function (raw){
-	var IMEI = raw.substring (3,raw.indexOf('B'));
+	var IMEI = raw.substring (1,raw.indexOf('B'));
 	//console.log('IMEI'+IMEI)
 	var Nbound = raw.substring(raw.indexOf('A')+1,raw.indexOf('N'));
 
 	var Ebound = raw.substring(raw.indexOf('N')+2,raw.indexOf('W'));
-
+	var speed = raw.substring(raw.indexOf('W')+1,raw.indexOf('W')+11 );
+	var bearing = raw.substring(raw.indexOf('W')+12,raw.indexOf('W')+18);
 	var latitude =  parseFloat(parseInt(Nbound.substring(0,2))+parseFloat(Nbound.substring(2,Nbound.length))/60).toFixed(5)
 	var longitude =   parseFloat(parseInt(Ebound.substring(0,2))+parseFloat(Ebound.substring(2,Ebound.length))/60).toFixed(5)
 	var gps ={
 		'lat': latitude,
 		'lng': longitude,
-		'IMEI' : IMEI
+		'speed': speed,
+		'bearing': bearing,
+		'IMEI' : IMEI,
 	}
 	return gps
 }
