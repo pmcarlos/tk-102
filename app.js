@@ -12,7 +12,7 @@ tk102.createServer({
 	port: portNum
 });
 tk102.on('trackGPS', function(gps) {
-	console.log(gps)
+	//console.log(gps)
 	// var recentPosition = {};
 	// recentPosition['lat'] = gps.lat;
 	// recentPosition['lng'] = gps.lng;
@@ -23,5 +23,5 @@ tk102.on('trackGPS', function(gps) {
 	// 	});
 
 	
-	console.log("\n TK102 TCP Gateway now running on port "+portNum);
+	//console.log("\n TK102 TCP Gateway now running on port "+portNum);
 });
