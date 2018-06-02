@@ -20,9 +20,9 @@ var tk102 = new EventEmitter()
 //defaults
 tk102.settings = {
 	ip:		'0.0.0.0',	// default listen on all IPs
-	port:		8080,		// 0 = random, 'listening' event reports port
-	connections:	3,		// 10 simultaneous connections
-	timeout:	5		// 10 seconds idle timeout
+	port:		1337,		// 0 = random, 'listening' event reports port
+	connections:	100,		// 10 simultaneous connections
+	timeout:	10		// 10 seconds idle timeout
 }
 
 //Create server
@@ -48,7 +48,7 @@ tk102.createServer = function( vars ) {
 		}
 
 	}).listen( tk102.settings.port, tk102.settings.ip, function() {
-		console.log('This port is listening...');
+		console.log('Port ' + tk102.settings.port + ' is listening...');
 		tk102.emit( 'listening', tk102.server.address() )
 	})
 
@@ -57,12 +57,13 @@ tk102.createServer = function( vars ) {
 
 	// inbound connection
 	tk102.server.on( 'connection', function( socket ) {
+		console.log('connection from', socket)
 		socket.setEncoding( 'utf8' )
 		var data = ''
 			socket.on( 'data', function( chunk ) {
 				data += chunk;
 				//This dummy data comment it when you are getting data dynamically
-				data = '(027028641389BR00160123A1428.4284N07850.1819E020.90557101.200000000000L00000000)';
+				//data = '(027028641389BR00160123A1428.4284N07850.1819E020.90557101.200000000000L00000000)';
 				var gps = {}
 				gps = tk102.parse( data )
 				if( data != '' ) {
