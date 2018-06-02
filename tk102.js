@@ -60,9 +60,9 @@ tk102.createServer = function( vars ) {
 		//console.log('connection from', socket)
 		socket.setEncoding( 'utf8' )
 		var data = ''
-			socket.on( 'data', function( chunk ) {
+			socket.on( 'data', function( chunk, other ) {
 				data += chunk;
-				console.log(chunk);
+				console.log(chunk, other);
 				//This dummy data comment it when you are getting data dynamically
 				//data = '(027028641389BR00160123A1428.4284N07850.1819E020.90557101.200000000000L00000000)';
 				var gps = {}
